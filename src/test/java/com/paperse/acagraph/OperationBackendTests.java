@@ -1,7 +1,6 @@
 package com.paperse.acagraph;
 
-import com.paperse.acagraph.Datemodels.Dao.TangoUserDao;
-import com.paperse.acagraph.Datemodels.domain.Paper;
+import com.paperse.acagraph.Datemodels.Dao.PaperDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +19,15 @@ import org.springframework.test.context.web.WebAppConfiguration;
 public class OperationBackendTests {
 
     @Autowired
-    private TangoUserDao tangoUserDao;
+    private PaperDao paperDao;
 
     @Test
     //@Transactional
     public void TransactionTest(){
-        Paper tangoUser = new Paper();
-        tangoUser.setValid(true);
-        tangoUserDao.save(tangoUser);
-        //Paper tangoUser1 = tangoUserDao.findByIdAndValid("aaa", true);
-        //tangoUser1.setValid(false);
+//        Paper tangoUser = new Paper();
+//        tangoUser.setValid(true);
+//        tangoUserDao.save(tangoUser);
+//        //Paper tangoUser1 = tangoUserDao.findByIdAndValid("aaa", true);
+//        //tangoUser1.setValid(false);
     }
 }

@@ -2,7 +2,6 @@ package com.paperse.acagraph.Datemodels.domain;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,8 +24,11 @@ public class Paper {
     //标题
     private String title;
 
-    //作者id
+    //作者
     private String authors;
+
+    //会议
+    private String vuene;
 
     //发布年份
     private int year;
@@ -41,7 +43,7 @@ public class Paper {
     private int ncite;
 
     //参考文献
-    private String references;
+    private String refs;
 
     //类型
     private String doctype;
@@ -52,9 +54,6 @@ public class Paper {
     //isbn
     private String isbn;
 
-    //doi
-    private String doi;
-
     //pdf
     private String pdf;
 
@@ -62,8 +61,10 @@ public class Paper {
     private String url;
 
     //摘要
-    @Column(name="abstract")
     private String abs;
+
+    //作者id
+    private String authorsid;
 
     public String getId() {
         return id;
@@ -129,12 +130,12 @@ public class Paper {
         this.ncite = ncite;
     }
 
-    public String getReferences() {
-        return references;
+    public String getRefs() {
+        return refs;
     }
 
-    public void setReferences(String references) {
-        this.references = references;
+    public void setRefs(String refs) {
+        this.refs = refs;
     }
 
     public String getDoctype() {
@@ -161,14 +162,6 @@ public class Paper {
         this.isbn = isbn;
     }
 
-    public String getDoi() {
-        return doi;
-    }
-
-    public void setDoi(String doi) {
-        this.doi = doi;
-    }
-
     public String getPdf() {
         return pdf;
     }
@@ -191,5 +184,21 @@ public class Paper {
 
     public void setAbs(String abs) {
         this.abs = abs;
+    }
+
+    public String getVuene() {
+        return vuene;
+    }
+
+    public void setVuene(String vuene) {
+        this.vuene = vuene;
+    }
+
+    public String getAuthorsid() {
+        return authorsid;
+    }
+
+    public void setAuthorsid(String authorsid) {
+        this.authorsid = authorsid;
     }
 }
