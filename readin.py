@@ -99,11 +99,11 @@ def savein(db, cursor, jline):
           (jline['abstract'].replace('\'', '\\\''), json.dumps(jline['authors']).replace('\'', '\\\''),
            json.dumps(jline['authorsid']).replace('\'', '\\\''), jline['doc_type'].replace('\'', '\\\''),
            json.dumps(jline['fos']).replace('\'', '\\\''), jline['isbn'].replace('\'', '\\\''),
-           json.dumps(jline['keywords']).replace('\'', '\\\''), jline['n_citation'].replace('\'', '\\\''),
+           json.dumps(jline['keywords']).replace('\'', '\\\''), jline['n_citation'],
            jline['id'].replace('\'', '\\\''), jline['pdf'].replace('\'', '\\\''),
            jline['publisher'].replace('\'', '\\\''), json.dumps(jline['references']).replace('\'', '\\\''),
            jline['title'].replace('\'', '\\\''), json.dumps(jline['url']).replace('\'', '\\\''),
-           jline['vuene'].replace('\'', '\\\''), jline['year'].replace('\'', '\\\''))
+           jline['vuene'].replace('\'', '\\\''), jline['year'])
     try:
         cursor.execute(sql)
         db.commit()
