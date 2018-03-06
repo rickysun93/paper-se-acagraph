@@ -3,13 +3,13 @@ import json
 import re
 
 
-def readin():
-    db = pymysql.connect("localhost", "user", "incongruous", "paperse")
+def readin(num):
+    db = pymysql.connect("localhost", "user", "incongruous", "paperse", charset='utf8')
     cursor = db.cursor()
 
-    i = 0
-    for line in open("/root/data/aca-graph/aminer/aminer_papers_0.txt", 'r', encoding='utf-8').readlines():
-        if i < 10000:
+    # i = 0
+    for line in open("/root/data/aca-graph/aminer/aminer_papers_" + str(num) + ".txt", 'r', encoding='utf-8').readlines():
+        # if i < 10000:
             jline = json.loads(line)
             if jline.get('lang') is None or jline['lang'] != "en":
                 continue
@@ -22,7 +22,7 @@ def readin():
                 na = n_dis(db, cursor, auth)
                 jline['authorsid'].append(na)
             savein(db, cursor, jline)
-            i = i+1
+            # i = i+1
 
     db.close()
 
@@ -31,7 +31,9 @@ def n_dis(db, cursor, auth):
     if 'org' not in auth:
         auth['org'] = ""
     name_low = auth['name'].lower()
-    name_low = re.sub('[-.]', '', name_low)
+    name_low = name_low.replace('. ', ' ')
+    name_low = name_low.replace('-', '')
+    name_low = name_low.replace('.', ' ')
     sql = "SELECT * FROM Author WHERE name_lower = '%s'" % name_low
     try:
         cursor.execute(sql)
@@ -94,12 +96,17 @@ def savein(db, cursor, jline):
                 oriid, pdf, publisher, refs, title, url, vuene, year)
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', 
                 '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d')""" % \
-          (jline['abstract'], json.dumps(jline['authors']), json.dumps(jline['authorsid']), jline['doc_type'],
-           json.dumps(jline['fos']), jline['isbn'], json.dumps(jline['keywords']), jline['n_citation'],
-           jline['id'], jline['pdf'], jline['publisher'], json.dumps(jline['references']),
-           jline['title'], json.dumps(jline['url']), jline['vuene'], jline['year'])
+          (jline['abstract'].replace('\'', '\\\''), json.dumps(jline['authors']).replace('\'', '\\\''),
+           json.dumps(jline['authorsid']).replace('\'', '\\\''), jline['doc_type'].replace('\'', '\\\''),
+           json.dumps(jline['fos']).replace('\'', '\\\''), jline['isbn'].replace('\'', '\\\''),
+           json.dumps(jline['keywords']).replace('\'', '\\\''), jline['n_citation'].replace('\'', '\\\''),
+           jline['id'].replace('\'', '\\\''), jline['pdf'].replace('\'', '\\\''),
+           jline['publisher'].replace('\'', '\\\''), json.dumps(jline['references']).replace('\'', '\\\''),
+           jline['title'].replace('\'', '\\\''), json.dumps(jline['url']).replace('\'', '\\\''),
+           jline['vuene'].replace('\'', '\\\''), jline['year'].replace('\'', '\\\''))
     try:
         cursor.execute(sql)
         db.commit()
-    except:
+    except Exception as e:
+        print(e)
         db.rollback()
