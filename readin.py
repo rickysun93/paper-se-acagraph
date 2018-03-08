@@ -13,14 +13,18 @@ def readin(num):
             jline = json.loads(line)
             if jline.get('lang') is None or jline['lang'] != "en":
                 continue
-            if jline.get('authors') is None or jline['authors'][0]['name'] == "":
+            if jline.get('authors') is None:
                 continue
             if jline.get('abstract') is None or jline['abstract'] == "":
                 continue
             jline['authorsid'] = []
             for auth in jline['authors']:
                 na = n_dis(db, cursor, auth)
+                if na == "":
+                    continue
                 jline['authorsid'].append(na)
+            if len(jline['authorsid']) == 0:
+                continue
             savein(db, cursor, jline)
             # i = i+1
 
@@ -28,6 +32,8 @@ def readin(num):
 
 
 def n_dis(db, cursor, auth):
+    if 'name' not in auth or auth['name'] == "":
+        return ""
     if 'org' not in auth:
         auth['org'] = ""
     name_low = auth['name'].lower()
@@ -63,8 +69,10 @@ def n_dis(db, cursor, auth):
         nid = db.insert_id()
         db.commit()
         return nid
-    except:
+    except Exception as e:
+        print(e)
         db.rollback()
+        return ""
 
 
 def savein(db, cursor, jline):
@@ -92,6 +100,7 @@ def savein(db, cursor, jline):
         jline['vuene'] = ""
     if 'year' not in jline:
         jline['year'] = 0
+    # jline['abstract'] = jline['abstract'].replace()
     sql = """INSERT INTO Paper(abs, authors, authorsid, doctype, fos, isbn, keywords, ncite, 
                 oriid, pdf, publisher, refs, title, url, vuene, year)
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', 
@@ -109,4 +118,5 @@ def savein(db, cursor, jline):
         db.commit()
     except Exception as e:
         print(e)
+        print(sql)
         db.rollback()
