@@ -7,7 +7,7 @@ def readin(num):
     db = pymysql.connect("localhost", "user", "incongruous", "paperse", charset='utf8')
     cursor = db.cursor()
 
-    # i = 0
+    i = 0
     for line in open("/root/data/aca-graph/aminer/aminer_papers_" + str(num) + ".txt", 'r', encoding='utf-8').readlines():
         # if i < 10000:
             jline = json.loads(line)
@@ -26,13 +26,14 @@ def readin(num):
             if len(jline['authorsid']) == 0:
                 continue
             savein(db, cursor, jline)
-            # i = i+1
+            i = i + 1
+            print(i)
 
     db.close()
 
 
 def n_dis(db, cursor, auth):
-    if 'name' not in auth or auth['name'] == "":
+    if auth['name'] is None or auth['name'] == "":
         return ""
     if 'org' not in auth:
         auth['org'] = ""
@@ -63,7 +64,7 @@ def n_dis(db, cursor, auth):
             pass
     sql = """INSERT INTO Author(name, name_lower, org)
           VALUES ('%s', '%s', '%s')""" % \
-        (auth['name'], name_low, auth['org'])
+        (auth['name'].replace('\'', '\\\''), name_low.replace('\'', '\\\''), auth['org'].replace('\'', '\\\''))
     try:
         cursor.execute(sql)
         nid = db.insert_id()
@@ -71,6 +72,7 @@ def n_dis(db, cursor, auth):
         return nid
     except Exception as e:
         print(e)
+        print(sql)
         db.rollback()
         return ""
 
