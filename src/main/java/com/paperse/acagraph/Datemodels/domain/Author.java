@@ -1,10 +1,6 @@
 package com.paperse.acagraph.Datemodels.domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -14,21 +10,21 @@ import javax.validation.constraints.NotNull;
 public class Author {
     @Id
     @NotNull
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     private String name;
 
-    private String name_lower;
+    @Column(name="name_lower")
+    private String namelower;
 
     private String org;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -40,12 +36,12 @@ public class Author {
         this.name = name;
     }
 
-    public String getName_lower() {
-        return name_lower;
+    public String getNamelower() {
+        return namelower;
     }
 
-    public void setName_lower(String name_lower) {
-        this.name_lower = name_lower;
+    public void setNamelower(String namelower) {
+        this.namelower = namelower;
     }
 
     public String getOrg() {

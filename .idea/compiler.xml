@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="paperse-acagraph" />
         <module name="tagooo-op" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="paperse-acagraph" target="1.8" />
       <module name="tagooo-op" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -3,7 +3,9 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/mysema/codegen/codegen/0.6.8/codegen-0.6.8.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/mysema/codegen/codegen/0.6.8/codegen-0.6.8-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/mysema/codegen/codegen/0.6.8/codegen-0.6.8-sources.jar!/" />
     </SOURCES>

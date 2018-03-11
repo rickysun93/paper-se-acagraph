@@ -1,6 +1,7 @@
 package com.paperse.acagraph.Services;
 
 import com.paperse.acagraph.Datemodels.Dao.AuthorDao;
+import com.paperse.acagraph.Datemodels.Dao.ConfDao;
 import com.paperse.acagraph.Datemodels.Dao.PaperDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +18,9 @@ public class BaseService {
 
     @Autowired
     protected AuthorDao authorDao;
+
+    @Autowired
+    protected ConfDao confDao;
 
     protected static final Logger logger = LogManager.getLogger(BaseService.class);
 }

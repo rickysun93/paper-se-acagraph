@@ -1,9 +1,8 @@
 package com.paperse.acagraph.Datemodels.domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -14,9 +13,8 @@ import javax.validation.constraints.NotNull;
 public class Paper {
     @Id
     @NotNull
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     //原id
     private String oriid;
@@ -66,11 +64,11 @@ public class Paper {
     //作者id
     private String authorsid;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
