@@ -2,38 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee3b1475-4508-427d-b841-8c7958b5e505" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_bson_3_4_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_3_4_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_core_3_4_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_neo4j_neo4j_ogm_api_2_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_neo4j_neo4j_ogm_compiler_2_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_neo4j_neo4j_ogm_core_2_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_neo4j_neo4j_ogm_http_driver_2_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_mongodb_1_5_3_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_neo4j_1_5_3_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_mongodb_1_10_3_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_neo4j_4_2_3_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/dao/MAuthorDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/dao/MConfDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/dao/MPaperDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/domain/MAuthor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/domain/MConf.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/domain/MPaper.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Datemodels/Readin/author.java" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/Readin/author.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Datemodels/Readin/citation.java" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/Readin/citation.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Datemodels/Readin/confinfo.java" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/Readin/confinfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Datemodels/Readin/paperinfo.java" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/Readin/paperinfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Datemodels/Readin/reference.java" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/Readin/reference.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperse-acagraph.iml" afterPath="$PROJECT_DIR$/paperse-acagraph.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Services/TestService.java" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Services/TestService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application-testdev.properties" afterPath="$PROJECT_DIR$/src/main/resources/application-testdev.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application-testprod.properties" afterPath="$PROJECT_DIR$/src/main/resources/application-testprod.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -68,16 +36,6 @@
                 <element signature="imports" expanded="true" />
                 <element signature="e#3848#3856#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application-testdev.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application-testdev.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -179,7 +137,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Datemodels/Dao/PaperDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Utils/Constrain.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application-prod.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/application-testprod.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/Author.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/domain/Paper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/domain/MConf.java" />
@@ -193,6 +150,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/dao/MPaperDao.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application-testdev.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Services/TestService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-testprod.properties" />
       </list>
     </option>
   </component>
@@ -554,12 +512,12 @@
       <workItem from="1519827421543" duration="4318000" />
       <workItem from="1520757683524" duration="8787000" />
       <workItem from="1520769547645" duration="329000" />
-      <workItem from="1520839985939" duration="4924000" />
+      <workItem from="1520839985939" duration="5010000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26622000" />
+    <option name="totallyTimeSpent" value="26708000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -822,14 +780,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-testprod.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="38" lean-forward="false" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Services/BaseService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -977,14 +927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-testdev.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Controllers/TsetController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -993,6 +935,22 @@
             <element signature="e#533#534#0" expanded="true" />
             <element signature="e#576#577#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-testdev.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-testprod.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
