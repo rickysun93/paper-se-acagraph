@@ -1,4 +1,4 @@
-package com.paperse.acagraph.Datemodels.Readin;
+package com.paperse.acagraph.DatamodelsMongo.Readin;
 
 /**
  * Created by sunhaoran on 2018/3/11.

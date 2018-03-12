@@ -1,9 +1,9 @@
-package com.paperse.acagraph.Datemodels.Readin;
+package com.paperse.acagraph.DatamodelsMongo.Readin;
 
 /**
  * Created by sunhaoran on 2018/3/11.
  */
-public class author {
+public class citation {
     private String url;
     private String name;
 

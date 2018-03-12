@@ -1,14 +1,21 @@
 package com.paperse.acagraph.Services;
 
 import com.google.gson.Gson;
-import com.paperse.acagraph.Datemodels.Readin.*;
-import com.paperse.acagraph.Datemodels.domain.Author;
-import com.paperse.acagraph.Datemodels.domain.Conf;
-import com.paperse.acagraph.Datemodels.domain.Paper;
+import com.paperse.acagraph.DatamodelsMongo.Readin.*;
+import com.paperse.acagraph.DatamodelsMongo.dao.MAuthorDao;
+import com.paperse.acagraph.DatamodelsMongo.dao.MConfDao;
+import com.paperse.acagraph.DatamodelsMongo.dao.MPaperDao;
+import com.paperse.acagraph.DatamodelsMongo.domain.MAuthor;
+import com.paperse.acagraph.DatamodelsMongo.domain.MConf;
+import com.paperse.acagraph.DatamodelsMongo.domain.MPaper;
 import com.paperse.acagraph.Utils.Constrain;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,6 +25,12 @@ import java.util.regex.Pattern;
  */
 @Service
 public class TestService extends BaseService{
+    @Autowired
+    private MAuthorDao mAuthorDao;
+    @Autowired
+    private MConfDao mConfDao;
+    @Autowired
+    private MPaperDao mPaperDao;
 
 //    @Transactional
 //    public UserModifyDTO Modify(UserModifyParameter userModifyParameter){
@@ -35,7 +48,6 @@ public class TestService extends BaseService{
 //        return new UserModifyDTO(0);
 //    }
 
-//    @Transactional
     public String Readin(){
         Gson gson = new Gson();
         String infilePath = Constrain.infilePath;
@@ -84,21 +96,21 @@ public class TestService extends BaseService{
                     }
                     pi.setReferencesid(referenceid);
 
-                    ArrayList<Integer> authorsid = new ArrayList<Integer>();
+                    ArrayList<String> authorsid = new ArrayList<String>();
                     for(author c : pi.getAuthors()){
                         matcher = pattern.matcher(c.getUrl());
                         if(matcher.find()) {
                             String temp = matcher.group(0);
                             String oriid = temp.substring(4, temp.length() - 1);
-                            Author oau = authorDao.findByNamelower(oriid);
+                            MAuthor oau = mAuthorDao.findByNamelower(oriid);
                             if(oau != null){
                                 authorsid.add(oau.getId());
                             } else {
-                                Author au = new Author();
+                                MAuthor au = new MAuthor();
                                 au.setName(c.getName());
                                 au.setNamelower(oriid);
                                 au.setOrg(c.getUrl());
-                                Author nau = authorDao.saveAndFlush(au);
+                                MAuthor nau = mAuthorDao.save(au);
                                 authorsid.add(nau.getId());
                             }
                         }
@@ -106,46 +118,46 @@ public class TestService extends BaseService{
                     pi.setAuthorsid(authorsid);
 
                     confinfo c = pi.getConf_info();
-                    Conf oconf = confDao.findByConfname(c.getConfname());
+                    MConf oconf = mConfDao.findByConfname(c.getConfname());
                     if(oconf != null){
-                        pi.getConf_info().setCcid(oconf.getId());
+                        pi.getConf_info().setCid(oconf.getId());
                     }else{
-                        Conf conf = new Conf();
+                        MConf conf = new MConf();
                         conf.setName(c.getName());
                         conf.setTitle(c.getTitle());
                         conf.setConfname(c.getConfname());
                         conf.setHref(c.getHref());
                         conf.setConfurl(c.getConfurl());
-                        Conf nconf = confDao.saveAndFlush(conf);
-                        pi.getConf_info().setCcid(nconf.getId());
+                        MConf nconf = mConfDao.save(conf);
+                        pi.getConf_info().setCid(nconf.getId());
                     }
 
-                    try{
-                        OutputStream out = new FileOutputStream(outfilePath, true);
-                        out.write((gson.toJson(pi)+'\n').getBytes());
-                        out.close();
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
+//                    try{
+//                        OutputStream out = new FileOutputStream(outfilePath, true);
+//                        out.write((gson.toJson(pi)+'\n').getBytes());
+//                        out.close();
+//                    }catch(Exception e){
+//                        e.printStackTrace();
+//                    }
 
-                    Paper paper = new Paper();
+                    MPaper paper = new MPaper();
                     paper.setOriid(pi.getPaperid());
                     paper.setTitle(pi.getName());
                     paper.setAuthors("");
-                    paper.setVuene(pi.getSession());
-                    paper.setYear(pi.getConf_info().getCcid());
+                    paper.setVuene(pi.getConf_info().getCid());
+                    paper.setYear(0);
                     paper.setKeywords("");
                     paper.setFos("");
                     paper.setNcite(pi.getCitationsid().size());
                     paper.setRefs(gson.toJson(pi.getReferencesid()));
                     paper.setDoctype("");
-                    paper.setPublisher("");
+                    paper.setPublisher(pi.getSession());
                     paper.setIsbn("");
                     paper.setPdf(pi.getPdfUrl());
                     paper.setUrl(pi.getUrl());
                     paper.setAbs(pi.getAbs());
                     paper.setAuthorsid(gson.toJson(pi.getAuthorsid()));
-                    paperDao.save(paper);
+                    mPaperDao.save(paper);
 
                     if(i%100==0)
                         System.out.print(i+" ");
@@ -160,6 +172,11 @@ public class TestService extends BaseService{
             e.printStackTrace();
             return "{\"result\":\"error\"}";
         }
+        return "{\"result\":\"OK\"}";
+    }
+
+    public String graph(){
+
         return "{\"result\":\"OK\"}";
     }
 }

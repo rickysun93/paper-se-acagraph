@@ -1,19 +1,27 @@
-package com.paperse.acagraph.Datemodels.Readin;
+package com.paperse.acagraph.DatamodelsMongo.domain;
 
-import com.google.gson.annotations.SerializedName;
+import javax.persistence.Id;
 
 /**
  * Created by sunhaoran on 2018/3/11.
  */
-public class confinfo {
+public class MConf {
+    @Id
+    private String id;
+
     private String name;
     private String title;
     private String confname;
     private String href;
     private String confurl;
-    @SerializedName("id")
-    private String cid;
-    private int ccid;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -53,21 +61,5 @@ public class confinfo {
 
     public void setConfurl(String confurl) {
         this.confurl = confurl;
-    }
-
-    public String getCid() {
-        return cid;
-    }
-
-    public void setCid(String cid) {
-        this.cid = cid;
-    }
-
-    public int getCcid() {
-        return ccid;
-    }
-
-    public void setCcid(int ccid) {
-        this.ccid = ccid;
     }
 }

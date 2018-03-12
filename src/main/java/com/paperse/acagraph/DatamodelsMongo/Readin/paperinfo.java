@@ -1,4 +1,4 @@
-package com.paperse.acagraph.Datemodels.Readin;
+package com.paperse.acagraph.DatamodelsMongo.Readin;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -21,7 +21,7 @@ public class paperinfo {
     private ArrayList<author> authors;
     private ArrayList<String> citationsid;
     private ArrayList<String> referencesid;
-    private ArrayList<Integer> authorsid;
+    private ArrayList<String> authorsid;
 
     public String getPaperid() {
         return paperid;
@@ -119,11 +119,11 @@ public class paperinfo {
         this.authors = authors;
     }
 
-    public ArrayList<Integer> getAuthorsid() {
+    public ArrayList<String> getAuthorsid() {
         return authorsid;
     }
 
-    public void setAuthorsid(ArrayList<Integer> authorsid) {
+    public void setAuthorsid(ArrayList<String> authorsid) {
         this.authorsid = authorsid;
     }
 }
