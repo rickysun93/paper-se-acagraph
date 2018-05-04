@@ -175,7 +175,7 @@ public class TestService extends BaseService{
         return "{\"result\":\"OK\"}";
     }
 
-    public String graph(){
+    public String Graph(){
 
         return "{\"result\":\"OK\"}";
     }

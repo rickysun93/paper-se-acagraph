@@ -21,4 +21,11 @@ public class TsetController extends BaseController{
     String Readin(){
         return testService.Readin();
     }
+
+    @RequestMapping(value = "/test/graph", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String Graph(){
+        return testService.Graph();
+    }
 }
