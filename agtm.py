@@ -152,7 +152,7 @@ class CorpusSet(object):
             self.init_corpus_with_articles(file_iter)
         return
 
-    def init_corpus_with_mongodb(self, ip, port):
+    def init_corpus_with_mongodb(self, ip, port, dbname):
         # 清理数据--word数据
         self.local_bi.clear()
         self.words_count = 0
@@ -178,7 +178,7 @@ class CorpusSet(object):
         self.local_2_global.clear()
 
         conn = pymongo.MongoClient(ip, port)
-        db = conn.papertest
+        db = conn[dbname]
 
         # 读取author数据
         mauthor = db.mAuthor
@@ -985,8 +985,9 @@ class LdaModel(LdaBase):
     LDA模型定义,主要实现训练、继续训练、推断的过程
     """
 
-    def init_train_model(self, ip, port, dir_path, model_name, current_iter, iters_num=None, topics_num=20, twords_num=200,
-                         alpha=-1.0, beta=0.01, eta=-1.0, gamma=-1.0, alpha_lambda=-1.0, data_file="", prior_file=""):
+    def init_train_model(self, dir_path, model_name, current_iter, iters_num=None, topics_num=20, twords_num=200,
+                         alpha=-1.0, beta=0.01, eta=-1.0, gamma=-1.0, alpha_lambda=-1.0, data_file="", prior_file="",
+                         ip="localhost", port=27017, dbname="papertest2"):
         """
         :key: 初始化训练模型,根据参数current_iter（是否等于0）决定是初始化新模型,还是加载已有模型
         :key: 当初始化新模型时,除了prior_file先验文件外,其余所有的参数都需要,且current_iter等于0
@@ -998,7 +999,7 @@ class LdaModel(LdaBase):
 
             # 初始化语料集
             # self.init_corpus_with_file(data_file)
-            self.init_corpus_with_mongodb(ip, port)
+            self.init_corpus_with_mongodb(ip, port, dbname)
 
             # 初始化部分变量
             self.dir_path = dir_path
@@ -1159,7 +1160,7 @@ if __name__ == "__main__":
     if test_type == "train":
         model = LdaModel()
         # 由prior_file决定是否带有先验知识
-        model.init_train_model("localhost", 27017, "data/", "model", current_iter=0, iters_num="auto", topics_num=20)
+        model.init_train_model("data/", "model", current_iter=0, iters_num="auto", topics_num=20, ip="localhost", port=27017, dbname="papertest2")
         # model.init_train_model("data/", "model", current_iter=0, iters_num="auto", topics_num=10, data_file="corpus.txt", prior_file="prior.twords")
         model.begin_gibbs_sampling_train()
     elif test_type == "inference":
