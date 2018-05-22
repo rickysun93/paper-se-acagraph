@@ -249,7 +249,7 @@ class CorpusSet(object):
                 cid = self.confids_list.index(line['vuene'])
                 self.artconfs_list.append(cid)
                 self.confs_paper[cid].append(len(self.artids_list) - 1)
-            if len(self.artids_list) % 100 == 0:
+            if len(self.artids_list) % 1000 == 0:
                 logging.debug("article data: " + str(len(self.artids_list)))
         for m in range(len(self.artids_list)):
             for r in range(len(self.arts_ref[m])):
