@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73ea66df-b6e3-411c-934d-7b8ffd2cb05c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/readin.py" afterPath="$PROJECT_DIR$/readin.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/agtm.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lda.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,18 +27,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="readin.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="readin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="17" lean-forward="true" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+            <state relative-caret-position="30">
+              <caret line="2" column="9" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
-                <marker date="1520514226000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
-                <marker date="1520514226000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
-                <marker date="1520514226000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
-                <marker date="1520514226000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
-                <marker date="1520514226000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
+                <marker date="1525928757000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
+                <marker date="1525928757000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
+                <marker date="1525928757000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
+                <marker date="1525928757000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
+                <marker date="1525928757000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lda.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lda.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9435">
+              <caret line="632" column="20" lean-forward="false" selection-start-line="632" selection-start-column="20" selection-end-line="632" selection-end-column="20" />
+              <folding>
+                <element signature="e#25#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="agtm.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/agtm.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="678">
+              <caret line="1129" column="34" lean-forward="true" selection-start-line="1129" selection-start-column="34" selection-end-line="1129" selection-end-column="34" />
+              <folding>
+                <element signature="e#25#34#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -51,6 +77,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>words_count</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -60,6 +91,8 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/reaadin.py" />
         <option value="$PROJECT_DIR$/readin.py" />
+        <option value="$PROJECT_DIR$/lda.py" />
+        <option value="$PROJECT_DIR$/agtm.py" />
       </list>
     </option>
   </component>
@@ -89,7 +122,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -101,7 +134,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -141,18 +174,18 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969216" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286991" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11341853" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286991" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.115548454" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -175,15 +208,25 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/readin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="30">
+          <caret line="2" column="9" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1520514226000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
-            <marker date="1520514226000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
-            <marker date="1520514226000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
-            <marker date="1520514226000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
-            <marker date="1520514226000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
+            <marker date="1525928757000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agtm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6165">
+          <caret line="411" column="17" lean-forward="true" selection-start-line="411" selection-start-column="17" selection-end-line="411" selection-end-column="17" />
+          <folding>
+            <element signature="e#25#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -194,11 +237,41 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1520514226000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
-            <marker date="1520514226000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
-            <marker date="1520514226000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
-            <marker date="1520514226000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
-            <marker date="1520514226000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
+            <marker date="1525928757000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <marker date="1525928757000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <marker date="1525928757000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
           </folding>
         </state>
       </provider>
@@ -209,19 +282,12 @@
           <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1520514226000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
-            <marker date="1520514226000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
-            <marker date="1520514226000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
-            <marker date="1520514226000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
-            <marker date="1520514226000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
+            <marker date="1525928757000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -250,21 +316,47 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="490">
           <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/readin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="17" lean-forward="true" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+        <state relative-caret-position="30">
+          <caret line="2" column="9" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1520514226000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
-            <marker date="1520514226000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
-            <marker date="1520514226000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
-            <marker date="1520514226000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
-            <marker date="1520514226000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
+            <marker date="1525928757000" expanded="true" signature="1342:1386" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="1737:1781" ph="SELECT * FRO... Author" />
+            <marker date="1525928757000" expanded="true" signature="2048:2108" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="2048:2125" ph="INSERT INTO Author... " />
+            <marker date="1525928757000" expanded="true" signature="3259:3546" ph="INSERT INTO Paper... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agtm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="678">
+          <caret line="1129" column="34" lean-forward="true" selection-start-line="1129" selection-start-column="34" selection-end-line="1129" selection-end-column="34" />
+          <folding>
+            <element signature="e#25#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lda.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9435">
+          <caret line="632" column="20" lean-forward="false" selection-start-line="632" selection-start-column="20" selection-end-line="632" selection-end-column="20" />
+          <folding>
+            <element signature="e#25#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
