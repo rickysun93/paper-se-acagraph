@@ -115,6 +115,8 @@ public class TestService extends BaseService{
                             }
                         }
                     }
+                    if(authorsid.size() == 0)
+                        continue;
                     pi.setAuthorsid(authorsid);
 
                     confinfo c = pi.getConf_info();
@@ -139,6 +141,9 @@ public class TestService extends BaseService{
 //                    }catch(Exception e){
 //                        e.printStackTrace();
 //                    }
+
+                    if(pi.getAbs().equals("") || pi.getAbs().contains("An abstract is not available"))
+                        continue;
 
                     MPaper paper = new MPaper();
                     paper.setOriid(pi.getPaperid());
