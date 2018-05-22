@@ -680,6 +680,10 @@ class LdaBase(CorpusSet):
                     theta_p = numpy.array([theta_p0, theta_p1, theta_p2, theta_p3])
                     # multi_p为多项式分布的参数,此时没有进行标准化
                     multi_p = theta_p * llambda_p
+                    if len(self.arts_ref[m]) == 0:
+                        multi_p[1] = 0.0
+                    if len(self.confs_paper[self.artconfs_list[m]]) == 1:
+                        multi_p[3] = 0.0
                     # 此时的source即为Gibbs抽样得到的source,它有较大的概率命中多项式概率大的source
                     s = LdaBase.multinomial_sample(multi_p)
 
@@ -1013,11 +1017,37 @@ class LdaModel(LdaBase):
             self.alpha_lambda = numpy.ones(4) * (alpha_lambda if alpha_lambda > 0 else 12.5)
 
             # 初始化Z值,以便统计计数
-            self.Z = [[numpy.random.randint(self.K) for n in range(len(self.arts_Z[m]))] for m in range(self.M)]
-            self.S = [[numpy.random.randint(4) for n in range(len(self.arts_Z[m]))] for m in range(self.M)]
-            self.R = [[numpy.random.randint(len(self.arts_ref[m])) for n in range(len(self.arts_Z[m]))] for m in range(self.M)]
-            self.A = [[numpy.random.randint(len(self.arts_auth[m])) for n in range(len(self.arts_Z[m]))] for m in range(self.M)]
-            self.C = [[numpy.random.randint(len(self.confs_paper[self.artconfs_list[m]])-1) for n in range(len(self.arts_Z[m]))] for m in range(self.M)]
+            for m in range(self.M):
+                z = []
+                s = []
+                r = []
+                a = []
+                c = []
+                for n in range(len(self.arts_Z[m])):
+                    z.append(numpy.random.randint(self.K))
+                    if len(self.arts_ref[m]) == 0 and len(self.confs_paper[self.artconfs_list[m]]) == 1:
+                        s.append(numpy.random.randint(2) * 2)
+                        r.append(0)
+                        c.append(0)
+                    elif len(self.arts_ref[m]) == 0:
+                        rand = numpy.random.randint(3)
+                        s.append(3 if rand == 1 else rand)
+                        r.append(0)
+                        c.append(numpy.random.randint(len(self.confs_paper[self.artconfs_list[m]])-1))
+                    elif len(self.confs_paper[self.artconfs_list[m]]) == 1:
+                        s.append(numpy.random.randint(3))
+                        r.append(numpy.random.randint(len(self.arts_ref[m])))
+                        c.append(0)
+                    else:
+                        s.append(numpy.random.randint(4))
+                        r.append(numpy.random.randint(len(self.arts_ref[m])))
+                        c.append(numpy.random.randint(len(self.confs_paper[self.artconfs_list[m]]) - 1))
+                    a.append(numpy.random.randint(len(self.arts_auth[m])))
+                self.Z.append(z)
+                self.S.append(s)
+                self.R.append(r)
+                self.A.append(a)
+                self.C.append(c)
         else:
             logging.debug("init an existed model")
 
