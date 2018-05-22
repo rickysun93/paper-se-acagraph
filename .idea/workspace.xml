@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73ea66df-b6e3-411c-934d-7b8ffd2cb05c" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/agtm.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/lda.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/agtm.py" afterPath="$PROJECT_DIR$/agtm.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,8 +58,8 @@
       <file leaf-file-name="agtm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/agtm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="678">
-              <caret line="1129" column="34" lean-forward="true" selection-start-line="1129" selection-start-column="34" selection-end-line="1129" selection-end-column="34" />
+            <state relative-caret-position="-1517">
+              <caret line="252" column="76" lean-forward="false" selection-start-line="252" selection-start-column="76" selection-end-line="252" selection-end-column="76" />
               <folding>
                 <element signature="e#25#34#0" expanded="true" />
               </folding>
@@ -343,8 +342,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/agtm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="678">
-          <caret line="1129" column="34" lean-forward="true" selection-start-line="1129" selection-start-column="34" selection-end-line="1129" selection-end-column="34" />
+        <state relative-caret-position="-1517">
+          <caret line="252" column="76" lean-forward="false" selection-start-line="252" selection-start-column="76" selection-end-line="252" selection-end-column="76" />
           <folding>
             <element signature="e#25#34#0" expanded="true" />
           </folding>

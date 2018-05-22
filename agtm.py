@@ -185,12 +185,14 @@ class CorpusSet(object):
         for line in mauthor.find():
             self.authorids_list.append(str(line['_id']))
             self.auths_paper.append([])
+        logging.debug("author data completed.")
 
         # 读取conf数据
         mconf = db.mConf
         for line in mconf.find():
             self.confids_list.append(str(line['_id']))
             self.confs_paper.append([])
+        logging.debug("conf data completed.")
 
         # 读取article数据
         mpaper = db.mPaper
@@ -247,9 +249,12 @@ class CorpusSet(object):
                 cid = self.confids_list.index(line['vuene'])
                 self.artconfs_list.append(cid)
                 self.confs_paper[cid].append(len(self.artids_list) - 1)
+            if len(self.artids_list) % 100 == 0:
+                logging.debug("article data: " + str(len(self.artids_list)))
         for m in range(len(self.artids_list)):
             for r in range(len(self.arts_ref[m])):
                 self.arts_ref[m][r] = self.artids_list.index(self.arts_ref[m][r])
+        logging.debug("article data completed.")
 
         # 做相关初始计算--word相关
         self.V = len(self.local_bi)
@@ -1124,7 +1129,7 @@ if __name__ == "__main__":
     if test_type == "train":
         model = LdaModel()
         # 由prior_file决定是否带有先验知识
-        model.init_train_model("localhost", 17012, "data/", "model", current_iter=0, iters_num="auto", topics_num=20)
+        model.init_train_model("localhost", 27017, "data/", "model", current_iter=0, iters_num="auto", topics_num=20)
         # model.init_train_model("data/", "model", current_iter=0, iters_num="auto", topics_num=10, data_file="corpus.txt", prior_file="prior.twords")
         model.begin_gibbs_sampling_train()
     elif test_type == "inference":
