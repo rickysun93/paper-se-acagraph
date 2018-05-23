@@ -542,7 +542,7 @@ class LdaBase(CorpusSet):
         :key: 初始化并计算模型的theta_a值(A*K),用到alpha值
         """
         assert self.sum_alpha > 0
-        self.theta = (self.an + self.alpha) / (self.ansum + self.sum_alpha)
+        self.theta_a = (self.an + self.alpha) / (self.ansum + self.sum_alpha)
         return
 
     # ---------------------------------------------计算Perplexity值------------------------------------------------------

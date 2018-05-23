@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="73ea66df-b6e3-411c-934d-7b8ffd2cb05c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/agtm.py" afterPath="$PROJECT_DIR$/agtm.py" />
-      <change beforePath="$PROJECT_DIR$/datafilter.py" afterPath="$PROJECT_DIR$/datafilter.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,7 +41,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="datafilter.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="datafilter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datafilter.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="480">
@@ -54,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="agtm.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="agtm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/agtm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="244" column="26" lean-forward="true" selection-start-line="244" selection-start-column="26" selection-end-line="244" selection-end-column="26" />
+            <state relative-caret-position="3363">
+              <caret line="559" column="0" lean-forward="true" selection-start-line="559" selection-start-column="0" selection-end-line="559" selection-end-column="0" />
               <folding>
                 <element signature="e#25#34#0" expanded="true" />
               </folding>
@@ -92,8 +91,8 @@
         <option value="$PROJECT_DIR$/readin.py" />
         <option value="$PROJECT_DIR$/lda.py" />
         <option value="$PROJECT_DIR$/filter.py" />
-        <option value="$PROJECT_DIR$/agtm.py" />
         <option value="$PROJECT_DIR$/datafilter.py" />
+        <option value="$PROJECT_DIR$/agtm.py" />
       </list>
     </option>
   </component>
@@ -485,22 +484,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/agtm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="244" column="26" lean-forward="true" selection-start-line="244" selection-start-column="26" selection-end-line="244" selection-end-column="26" />
-          <folding>
-            <element signature="e#25#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datafilter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agtm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3363">
+          <caret line="559" column="0" lean-forward="true" selection-start-line="559" selection-start-column="0" selection-end-line="559" selection-end-column="0" />
+          <folding>
+            <element signature="e#25#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
