@@ -20,16 +20,23 @@ def datafilter(ip="localhost", port=27017, dbname="papertest2"):
     en_stop = stop_words.get_stop_words('en')  # stop words
     for line in mpaper.find():
         tokens = tokenizer.tokenize(line['abs'])  # 分词
+        if not tokens:
+            dels.append(line['_id'])
+            continue
         low_tokens = [w.lower() for w in tokens]  # 转小写
         stopped_tokens = [w for w in low_tokens if w not in en_stop]  # 去除停用词
         if stopped_tokens:
             ids[line['oriid']] = 1
         else:
             dels.append(line['_id'])
+        i += 1
+        if i % 1000 == 0:
+            print(str(i))
     print("ok")
     for d in dels:
         mpaper.delete_one({'_id': d})
     print("ok")
+    i = 0
     for line in mpaper.find():
         refs = json.loads(line['refs'])
         nrefs = []

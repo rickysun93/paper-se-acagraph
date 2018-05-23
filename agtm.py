@@ -182,9 +182,11 @@ class CorpusSet(object):
 
         # 读取author数据
         mauthor = db.mAuthor
+        authorid2index = {}
         for line in mauthor.find():
             self.authorids_list.append(str(line['_id']))
             self.auths_paper.append([])
+            authorid2index[str(line['_id'])] = len(self.authorids_list) - 1
         logging.debug("author data completed.")
 
         # 读取conf数据
@@ -204,6 +206,7 @@ class CorpusSet(object):
         tokenizer = tokenize.RegexpTokenizer(pattern)
         en_stop = stop_words.get_stop_words('en')  # stop words
         p_stemmer = PorterStemmer()
+        artid2index = {}
         for line in mpaper.find():
             # 获取article的id
             art_id = line['oriid']
@@ -241,7 +244,7 @@ class CorpusSet(object):
                 # 获取作者id
                 auths = []
                 for auth in json.loads(line['authorsid']):
-                    aid = self.authorids_list.index(auth)
+                    aid = authorid2index[auth]
                     auths.append(aid)
                     self.auths_paper[aid].append(len(self.artids_list) - 1)
                 self.arts_auth.append(auths)
@@ -249,12 +252,14 @@ class CorpusSet(object):
                 cid = self.confids_list.index(line['vuene'])
                 self.artconfs_list.append(cid)
                 self.confs_paper[cid].append(len(self.artids_list) - 1)
+                artid2index[art_id] = len(self.artids_list) - 1
             if len(self.artids_list) % 1000 == 0:
                 logging.debug("article data: " + str(len(self.artids_list)))
+        logging.debug("article data completed.")
         for m in range(len(self.artids_list)):
             for r in range(len(self.arts_ref[m])):
-                self.arts_ref[m][r] = self.artids_list.index(self.arts_ref[m][r])
-        logging.debug("article data completed.")
+                self.arts_ref[m][r] = artid2index[self.arts_ref[m][r]]
+        logging.debug("ref data completed.")
 
         # 做相关初始计算--word相关
         self.V = len(self.local_bi)
@@ -392,7 +397,7 @@ class LdaBase(CorpusSet):
         self.ns = numpy.zeros((self.M, 4))  # ns[m, i]用于保存第m篇article中来源为i的词的个数,其维数为 M * 4
         self.nr = [numpy.zeros(len(i)) for i in self.arts_ref]  # nr[m][r]用于保存第m篇article中选择参考文献r的词的个数,其维数为 M * Lm
         self.na = [numpy.zeros(len(i)) for i in self.arts_auth]  # na[m][a]用于保存第m篇article中选择作者a的词的个数,其维数为 M * Am
-        self.nssum = numpy.zeros((self.K, 1))  # nssum[m, 0]用于保存第m篇article的总词数,维数为 M * 1
+        self.nssum = numpy.zeros((self.M, 1))  # nssum[m, 0]用于保存第m篇article的总词数,维数为 M * 1
         self.an = numpy.zeros((len(self.authorids_list), self.K))  # an[a, k]用于保存第a个author的第k个topic产生的词的个数,其维数为 A * K
         self.ansum = numpy.zeros((len(self.authorids_list), 1))  # ansum[a, 0]用于保存第a个author生成的总词数,维数为 A * 1
 
@@ -431,7 +436,7 @@ class LdaBase(CorpusSet):
         self.ns = numpy.zeros((self.M, 4), dtype=numpy.int)
         self.nr = [numpy.zeros(len(i), dtype=numpy.int) for i in self.arts_ref]
         self.na = [numpy.zeros(len(i), dtype=numpy.int) for i in self.arts_auth]
-        self.nssum = numpy.zeros((self.K, 1), dtype=numpy.int)
+        self.nssum = numpy.zeros((self.M, 1), dtype=numpy.int)
         self.an = numpy.zeros((len(self.authorids_list), self.K), dtype=numpy.int)
         self.ansum = numpy.zeros((len(self.authorids_list), 1), dtype=numpy.int)
 
