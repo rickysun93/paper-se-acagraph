@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ee3b1475-4508-427d-b841-8c7958b5e505" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Services/TestService.java" afterPath="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Services/TestService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application-testdev.properties" afterPath="$PROJECT_DIR$/src/main/resources/application-testdev.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application-testprod.properties" afterPath="$PROJECT_DIR$/src/main/resources/application-testprod.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,7 +19,7 @@
       <file leaf-file-name="TsetController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Controllers/TsetController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
+            <state relative-caret-position="0">
               <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
               <folding>
                 <element signature="e#697#698#0" expanded="true" />
@@ -30,8 +32,8 @@
       <file leaf-file-name="TestService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Services/TestService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="145" column="33" lean-forward="true" selection-start-line="145" selection-start-column="33" selection-end-line="145" selection-end-column="33" />
+            <state relative-caret-position="600">
+              <caret line="171" column="17" lean-forward="true" selection-start-line="171" selection-start-column="17" selection-end-line="171" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -109,10 +111,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/dao/MAuthorDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/DatamodelsMongo/dao/MPaperDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Controllers/TsetController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application-testdev.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/application-testprod.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Utils/Constrain.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Services/TestService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-testdev.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-testprod.properties" />
       </list>
     </option>
   </component>
@@ -151,10 +153,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -314,6 +312,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -481,11 +483,12 @@
       <workItem from="1525357056100" duration="8000" />
       <workItem from="1525418879397" duration="431000" />
       <workItem from="1526975145347" duration="2573000" />
+      <workItem from="1527151022683" duration="217000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32770000" />
+    <option name="totallyTimeSpent" value="32987000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -876,25 +879,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-testprod.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="44" lean-forward="false" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-testdev.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="37" lean-forward="true" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Controllers/TsetController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
+        <state relative-caret-position="0">
           <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
           <folding>
             <element signature="e#697#698#0" expanded="true" />
@@ -911,10 +898,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-testdev.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="39" lean-forward="false" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-testprod.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="39" lean-forward="true" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/paperse/acagraph/Services/TestService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="145" column="33" lean-forward="true" selection-start-line="145" selection-start-column="33" selection-end-line="145" selection-end-column="33" />
+        <state relative-caret-position="600">
+          <caret line="171" column="17" lean-forward="true" selection-start-line="171" selection-start-column="17" selection-end-line="171" selection-end-column="17" />
           <folding />
         </state>
       </provider>

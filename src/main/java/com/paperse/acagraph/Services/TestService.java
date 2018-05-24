@@ -166,6 +166,8 @@ public class TestService extends BaseService{
 
                     if(i%100==0)
                         System.out.print(i+" ");
+                    if(i==10000)
+                        break;
                     i++;
                 }
                 read.close();
