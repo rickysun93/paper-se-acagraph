@@ -650,8 +650,8 @@ class LdaModel(LdaBase):
     LDA模型定义,主要实现训练、继续训练、推断的过程
     """
 
-    def init_train_model(self, dir_path, model_name, current_iter, iters_num=None, topics_num=10, twords_num=200,
-                         alpha=-1.0, beta=0.01, data_file="", prior_file=""):
+    def init_train_model(self, dir_path, model_name, current_iter, iters_num=None, topics_num=20, twords_num=200,
+                         alpha=-1.0, beta=0.01, data_file="", prior_file="", ip="localhost", port=27017, dbname="papertest2"):
         """
         :key: 初始化训练模型,根据参数current_iter（是否等于0）决定是初始化新模型,还是加载已有模型
         :key: 当初始化新模型时,除了prior_file先验文件外,其余所有的参数都需要,且current_iter等于0
@@ -662,7 +662,8 @@ class LdaModel(LdaBase):
             logging.debug("init a new train model")
 
             # 初始化语料集
-            self.init_corpus_with_file(data_file)
+            # self.init_corpus_with_file(data_file)
+            self.init_corpus_with_mongodb(ip, port, dbname)
 
             # 初始化部分变量
             self.dir_path = dir_path
