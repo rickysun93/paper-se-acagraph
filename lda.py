@@ -4,6 +4,10 @@ import os
 import numpy
 import logging
 from collections import defaultdict
+import pymongo
+from nltk import tokenize
+import stop_words
+from nltk.stem.porter import PorterStemmer
 
 # 全局变量
 MAX_ITER_NUM = 10000    # 最大迭代次数
@@ -134,6 +138,79 @@ class CorpusSet(object):
         """
         with open(file_name, "r", encoding="utf-8") as file_iter:
             self.init_corpus_with_articles(file_iter)
+        return
+
+    def init_corpus_with_mongodb(self, ip, port, dbname):
+        # 清理数据--word数据
+        self.local_bi.clear()
+        self.words_count = 0
+        self.V = 0
+
+        # 清理数据--article数据
+        self.artids_list.clear()
+        self.arts_Z.clear()
+        self.M = 0
+
+        # 清理数据--清理local到global的映射关系
+        self.local_2_global.clear()
+
+        conn = pymongo.MongoClient(ip, port)
+        db = conn[dbname]
+
+        # 读取article数据
+        mpaper = db.mPaper
+        pattern = r"""(?x)                   # set flag to allow verbose regexps
+                      (?:[A-Z]\.)+           # abbreviations, e.g. U.S.A.
+                      |\d+(?:\.\d+)?%?       # numbers, incl. currency and percentages
+                      |\w+(?:[-']\w+)*       # words w/ optional internal hyphens/apostrophe
+                    """
+        tokenizer = tokenize.RegexpTokenizer(pattern)
+        en_stop = stop_words.get_stop_words('en')  # stop words
+        p_stemmer = PorterStemmer()
+        for line in mpaper.find():
+            # 获取article的id
+            art_id = line['oriid']
+
+            # 获取word的id
+            tokens = tokenizer.tokenize(line['abs'])  # 分词
+            low_tokens = [w.lower() for w in tokens]  # 转小写
+            stopped_tokens = [w for w in low_tokens if w not in en_stop]  # 去除停用词
+            stemmed_tokens = [p_stemmer.stem(w) for w in stopped_tokens]  # 词干提取
+            art_wordid_list = []
+            for word in stemmed_tokens:
+                local_id = self.local_bi.get_key(word) if self.local_bi.contains_value(word) else len(self.local_bi)
+
+                # 这里的self.global_bi为None和为空是有区别的
+                if self.global_bi is None:
+                    # 更新id信息
+                    self.local_bi.add_key_value(local_id, word)
+                    art_wordid_list.append(local_id)
+                else:
+                    if self.global_bi.contains_value(word):
+                        # 更新id信息
+                        self.local_bi.add_key_value(local_id, word)
+                        art_wordid_list.append(local_id)
+
+                        # 更新local_2_global
+                        self.local_2_global[local_id] = self.global_bi.get_key(word)
+
+            # 更新类变量: 必须article中word的数量大于0
+            if len(art_wordid_list) > 0:
+                self.words_count += len(art_wordid_list)
+                self.artids_list.append(art_id)
+                self.arts_Z.append(art_wordid_list)
+            if len(self.artids_list) % 1000 == 0:
+                logging.debug("article data: " + str(len(self.artids_list)))
+        logging.debug("article data completed.")
+
+        # 做相关初始计算--word相关
+        self.V = len(self.local_bi)
+        logging.debug("words number: " + str(self.V) + ", " + str(self.words_count))
+
+        # 做相关初始计算--article相关
+        self.M = len(self.artids_list)
+        logging.debug("articles number: " + str(self.M))
+
         return
 
     def init_corpus_with_articles(self, article_list):
