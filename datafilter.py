@@ -50,5 +50,19 @@ def datafilter(ip="localhost", port=27017, dbname="papertest2"):
             print(str(i))
 
 
+def cal(ip="localhost", port=27017, dbname="papertest3"):
+    conn = pymongo.MongoClient(ip, port)
+    db = conn[dbname]
+    mpaper = db.mPaper
+    sl = 0
+    sa = 0
+    s = 0
+    for line in mpaper.find():
+        sl += len(json.loads(line['refs']))
+        sa += len(json.loads(line['authorsid']))
+        s += 1
+    print(sl/s, sa/s)
+
+
 def test():
     print('test')

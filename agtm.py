@@ -255,11 +255,10 @@ class CorpusSet(object):
                 artid2index[art_id] = len(self.artids_list) - 1
             if len(self.artids_list) % 1000 == 0:
                 logging.debug("article data: " + str(len(self.artids_list)))
-        logging.debug("article data completed.")
         for m in range(len(self.artids_list)):
             for r in range(len(self.arts_ref[m])):
                 self.arts_ref[m][r] = artid2index[self.arts_ref[m][r]]
-        logging.debug("ref data completed.")
+        logging.debug("article data completed.")
 
         # 做相关初始计算--word相关
         self.V = len(self.local_bi)
@@ -387,7 +386,7 @@ class LdaBase(CorpusSet):
         self.S = []  # 所有word的source信息,即S(m, n),维数为 M * article.size()
         self.R = []  # 所有word的ref信息,即R(m, n),维数为 M * article.size()
         self.A = []  # 所有word的author信息,即A(m, n),维数为 M * article.size()
-        self.C = []  # 所有word的paper-conf信息,即C(m, n),维数为 M * article.size()
+        # self.C = []  # 所有word的paper-conf信息,即C(m, n),维数为 M * article.size()
 
         # 统计计数(可由self.ZSRAC计算得到)
         self.nd = numpy.zeros((self.M, self.K))     # nd[m, k]用于保存第m篇article的第k个topic产生的词的个数,其维数为 M * K
@@ -400,6 +399,8 @@ class LdaBase(CorpusSet):
         self.nssum = numpy.zeros((self.M, 1))  # nssum[m, 0]用于保存第m篇article的总词数,维数为 M * 1
         self.an = numpy.zeros((len(self.authorids_list), self.K))  # an[a, k]用于保存第a个author的第k个topic产生的词的个数,其维数为 A * K
         self.ansum = numpy.zeros((len(self.authorids_list), 1))  # ansum[a, 0]用于保存第a个author生成的总词数,维数为 A * 1
+        self.cn = numpy.zeros((len(self.confids_list), self.K))  # cn[c, k]用于保存第c个conf的第k个topic产生的词的个数,其维数为 C * K
+        self.cnsum = numpy.zeros((len(self.confids_list), 1))  # cnsum[c, 0]用于保存第c个conf生成的总词数,维数为 C * 1
 
         # 多项式分布参数变量
         self.theta = numpy.zeros((self.M, self.K))  # Doc-Topic多项式分布的参数,维数为 M * K,由alpha值影响
@@ -408,6 +409,7 @@ class LdaBase(CorpusSet):
         self.mu = [numpy.zeros(len(i)) for i in self.arts_auth]  # Doc-Author多项式分布的参数,维数为 M * Am,由gamma值影响
         self.llambda = numpy.zeros((self.M, 4))  # Doc-Source多项式分布的参数,维数为 M * 4,由alpha_lambda值影响
         self.theta_a = numpy.zeros((len(self.authorids_list), self.K))  # Author-Topic多项式分布的参数,维数为 A * K,由alpha值影响
+        self.theta_c = numpy.zeros((len(self.confids_list), self.K))  # Conf-Topic多项式分布的参数,维数为 C * K,由alpha值影响
 
         # 辅助变量,目的是提高算法执行效率
         self.sum_alpha = 0.0                        # 超参数alpha的和
@@ -439,10 +441,12 @@ class LdaBase(CorpusSet):
         self.nssum = numpy.zeros((self.M, 1), dtype=numpy.int)
         self.an = numpy.zeros((len(self.authorids_list), self.K), dtype=numpy.int)
         self.ansum = numpy.zeros((len(self.authorids_list), 1), dtype=numpy.int)
+        self.cn = numpy.zeros((len(self.confids_list), self.K), dtype=numpy.int)
+        self.cnsum = numpy.zeros((len(self.confids_list), 1), dtype=numpy.int)
 
         # 根据self.Z进行更新,更新self.nd[m, k]和self.ndsum[m, 0]
         for m in range(self.M):
-            for k, s, r, a, c in zip(self.Z[m], self.S[m], self.R[m], self.A[m], self.C[m]):
+            for k, s, r, a in zip(self.Z[m], self.S[m], self.R[m], self.A[m]):
                 self.ns[m, s] += 1
                 if s == 0:
                     self.nd[m, k] += 1
@@ -456,8 +460,8 @@ class LdaBase(CorpusSet):
                     self.ansum[a, 0] += 1
                     self.na[m][a] += 1
                 elif s == 3:
-                    self.nd[c, k] += 1
-                    self.ndsum[c, 0] += 1
+                    self.cn[self.artconfs_list[m], k] += 1
+                    self.cnsum[self.artconfs_list[m], 0] += 1
             self.nssum[m, 0] = len(self.Z[m])
         return
 
@@ -545,29 +549,36 @@ class LdaBase(CorpusSet):
         self.theta_a = (self.an + self.alpha) / (self.ansum + self.sum_alpha)
         return
 
+    def calculate_theta_c(self):
+        """
+        :key: 初始化并计算模型的theta_c值(*K),用到alpha值
+        """
+        assert self.sum_alpha > 0
+        self.theta_c = (self.cn + self.alpha) / (self.cnsum + self.sum_alpha)
+        return
+
     # ---------------------------------------------计算Perplexity值------------------------------------------------------
     def calculate_perplexity(self):
         """
         :key: 计算Perplexity值,并返回
         """
-        # 计算theta.phi.delta.mu.llambda.theta_a值
+        # 计算theta.phi.delta.mu.llambda.theta_a.theta_c值
         self.calculate_theta()
         self.calculate_phi()
         self.calculate_delta()
         self.calculate_mu()
         self.calculate_llambda()
         self.calculate_theta_a()
+        self.calculate_theta_c()
 
         # 开始计算
         preplexity = 0.0
         for m in range(self.M):
             for w in self.arts_Z[m]:
-                p = self.llambda[m, 0] * numpy.sum(self.theta[m] * self.phi[:, w])
-                p += self.llambda[m, 1] * numpy.sum(self.delta[m] * numpy.sum(self.theta[self.arts_ref[m]] * self.phi[:, w], 1))
-                p += self.llambda[m, 2] * numpy.sum(self.mu[m] * numpy.sum(self.theta_a[self.arts_auth[m]] * self.phi[:, w], 1))
-                p += self.llambda[m, 3] * numpy.sum(1.0 / (len(self.confs_paper[self.artconfs_list[m]]) - 1) * numpy.array(
-                    [numpy.sum(self.theta[conf] * self.phi[:, w]) for conf in
-                     self.confs_paper[self.artconfs_list[m]] if conf != m]))
+                p = self.llambda[m, 0] * numpy.dot(self.theta[m], self.phi[:, w])
+                p += self.llambda[m, 1] * numpy.dot(self.delta[m], numpy.dot(self.theta[self.arts_ref[m]], self.phi[:, w]))
+                p += self.llambda[m, 2] * numpy.dot(self.mu[m], numpy.dot(self.theta_a[self.arts_auth[m]], self.phi[:, w]))
+                p += self.llambda[m, 3] * numpy.dot(self.theta_c[self.artconfs_list[m]], self.phi[:, w])
                 preplexity += numpy.log(p)
         return numpy.exp(-(preplexity / self.words_count))
 
@@ -632,7 +643,6 @@ class LdaBase(CorpusSet):
                     s = self.S[m][n]
                     r = self.R[m][n]
                     a = self.A[m][n]
-                    c = self.C[m][n]
 
                     # 统计计数减一
                     self.nw[k, w] -= 1
@@ -651,8 +661,8 @@ class LdaBase(CorpusSet):
                         self.ansum[a, 0] -= 1
                         self.na[m][a] -= 1
                     elif s == 3:
-                        self.nd[c, k] -= 1
-                        self.ndsum[c, 0] -= 1
+                        self.cn[self.artconfs_list[m], k] -= 1
+                        self.cnsum[self.artconfs_list[m], 0] -= 1
 
                     # if self.prior_word and (w in self.prior_word):
                     #     # 带有先验知识,否则进行正常抽样
@@ -678,17 +688,15 @@ class LdaBase(CorpusSet):
                     # 计算llambda值--下边的过程为抽取第m篇article的第n个词w的source,即新的s
                     llambda_p = (self.ns[m] + self.alpha_lambda) / (self.nssum[m] + self.sum_alpha_lambda)
                     # 计算theta值
-                    theta_p0 = (self.nd[m, k] + self.alpha[k]) / (self.ndsum[m, 0] + self.sum_alpha)
-                    theta_p1 = (self.nd[r, k] + self.alpha[k]) / (self.ndsum[r, 0] + self.sum_alpha)
-                    theta_p2 = (self.an[a, k] + self.alpha[k]) / (self.ansum[a, 0] + self.sum_alpha)
-                    theta_p3 = (self.nd[c, k] + self.alpha[k]) / (self.ndsum[c, 0] + self.sum_alpha)
-                    theta_p = numpy.array([theta_p0, theta_p1, theta_p2, theta_p3])
+                    theta_p = numpy.zeros(4)
+                    theta_p[0] = (self.nd[m, k] + self.alpha[k]) / (self.ndsum[m, 0] + self.sum_alpha)
+                    if len(self.arts_ref[m]) != 0:
+                        theta_p[1] = (self.nd[r, k] + self.alpha[k]) / (self.ndsum[r, 0] + self.sum_alpha)
+                    theta_p[2] = (self.an[a, k] + self.alpha[k]) / (self.ansum[a, 0] + self.sum_alpha)
+                    theta_p[3] = (self.cn[self.artconfs_list[m], k] + self.alpha[k]) / (
+                            self.cnsum[self.artconfs_list[m], 0] + self.sum_alpha)
                     # multi_p为多项式分布的参数,此时没有进行标准化
                     multi_p = theta_p * llambda_p
-                    if len(self.arts_ref[m]) == 0:
-                        multi_p[1] = 0.0
-                    if len(self.confs_paper[self.artconfs_list[m]]) == 1:
-                        multi_p[3] = 0.0
                     # 此时的source即为Gibbs抽样得到的source,它有较大的概率命中多项式概率大的source
                     s = LdaBase.multinomial_sample(multi_p)
 
@@ -706,9 +714,8 @@ class LdaBase(CorpusSet):
                         self.ndsum[m, 0] += 1
                     elif s == 1:
                         # 计算theta值--下边的过程为抽取第m篇article的第n个词w的ref,即新的r
-                        theta_p = numpy.array(
-                            [(self.nd[ref, k] + self.alpha[k]) / (self.ndsum[ref, 0] + self.sum_alpha) for ref in
-                             self.arts_ref[m]])
+                        theta_p = (self.nd[self.arts_ref[m], k] + self.alpha[k]) / (
+                                self.ndsum[self.arts_ref[m], 0] + self.sum_alpha)
                         # 计算delta值
                         delta_p = (self.nr[m] + self.eta[m]) / (self.ns[m, s] + self.sum_eta[m])
                         # multi_p为多项式分布的参数,此时没有进行标准化
@@ -730,9 +737,8 @@ class LdaBase(CorpusSet):
                         self.nr[m][r] += 1
                     elif s == 2:
                         # 计算theta_a值--下边的过程为抽取第m篇article的第n个词w的author,即新的a
-                        theta_a_p = numpy.array(
-                            [(self.an[auth, k] + self.alpha[k]) / (self.ansum[auth, 0] + self.sum_alpha) for auth in
-                             self.arts_auth[m]])
+                        theta_a_p = (self.an[self.arts_auth[m], k] + self.alpha[k]) / (
+                                self.ansum[self.arts_auth[m], 0] + self.sum_alpha)
                         # 计算mu值
                         mu_p = (self.na[m] + self.gamma[m]) / (self.ns[m, s] + self.sum_gamma[m])
                         # multi_p为多项式分布的参数,此时没有进行标准化
@@ -741,11 +747,11 @@ class LdaBase(CorpusSet):
                         a = LdaBase.multinomial_sample(multi_p)
 
                         # 计算theta值--下边的过程为抽取第m篇article的第n个词w的topic,即新的k
-                        theta_p = (self.an[a] + self.alpha) / (self.ansum[a, 0] + self.sum_alpha)
+                        theta_a_p = (self.an[a] + self.alpha) / (self.ansum[a, 0] + self.sum_alpha)
                         # 计算phi值
                         phi_p = (self.nw[:, w] + self.beta[w]) / (self.nwsum[:, 0] + self.sum_beta)
                         # multi_p为多项式分布的参数,此时没有进行标准化
-                        multi_p = theta_p * phi_p
+                        multi_p = theta_a_p * phi_p
                         # 此时的topic即为Gibbs抽样得到的topic,它有较大的概率命中多项式概率大的topic
                         k = LdaBase.multinomial_sample(multi_p)
                         # 统计计数加一
@@ -753,28 +759,18 @@ class LdaBase(CorpusSet):
                         self.ansum[a, 0] += 1
                         self.na[m][a] += 1
                     elif s == 3:
-                        # 计算theta值--下边的过程为抽取第m篇article的第n个词w的paper-conf,即新的c
-                        theta_p = numpy.array(
-                            [(self.nd[conf, k] + self.alpha[k]) / (self.ndsum[conf, 0] + self.sum_alpha) for conf in
-                             self.confs_paper[self.artconfs_list[m]] if conf != m])
-                        # 计算Q值
-                        q_p = numpy.ones(len(self.confs_paper[self.artconfs_list[m]]) - 1) / (len(self.confs_paper[self.artconfs_list[m]]) - 1)
-                        # multi_p为多项式分布的参数,此时没有进行标准化
-                        multi_p = theta_p * q_p
-                        # 此时的paper-conf即为Gibbs抽样得到的paper-conf,它有较大的概率命中多项式概率大的paper-conf
-                        c = LdaBase.multinomial_sample(multi_p)
-
                         # 计算theta值--下边的过程为抽取第m篇article的第n个词w的topic,即新的k
-                        theta_p = (self.nd[c] + self.alpha) / (self.ndsum[c, 0] + self.sum_alpha)
+                        theta_c_p = (self.cn[self.artconfs_list[m]] + self.alpha) / (
+                                self.cnsum[self.artconfs_list[m], 0] + self.sum_alpha)
                         # 计算phi值
                         phi_p = (self.nw[:, w] + self.beta[w]) / (self.nwsum[:, 0] + self.sum_beta)
                         # multi_p为多项式分布的参数,此时没有进行标准化
-                        multi_p = theta_p * phi_p
+                        multi_p = theta_c_p * phi_p
                         # 此时的topic即为Gibbs抽样得到的topic,它有较大的概率命中多项式概率大的topic
                         k = LdaBase.multinomial_sample(multi_p)
                         # 统计计数加一
-                        self.nd[c, k] += 1
-                        self.ndsum[c, 0] += 1
+                        self.cn[self.artconfs_list[m], k] += 1
+                        self.cnsum[self.artconfs_list[m], 0] += 1
 
                     # 统计计数加一
                     self.nw[k, w] += 1
@@ -787,7 +783,6 @@ class LdaBase(CorpusSet):
                     self.S[m][n] = s
                     self.R[m][n] = r
                     self.A[m][n] = a
-                    self.C[m][n] = c
         # 抽样完毕
         return
 
@@ -823,13 +818,13 @@ class LdaBase(CorpusSet):
 
     def save_zvalue(self, file_name):
         """
-        :key: 保存模型关于article的变量,包括: arts_Z, Z, S, R, A, C, artids_list, arts_ref, arts_auth, artconfs_list等
+        :key: 保存模型关于article的变量,包括: arts_Z, Z, S, R, A, artids_list, arts_ref, arts_auth, artconfs_list等
         """
         with open(file_name, "w", encoding="utf-8") as f_zvalue:
             for m in range(self.M):
-                out_line = [str(w) + ":" + str(k) + ":" + str(s) + ":" + str(r) + ":" + str(a) + ":" + str(c)
-                            for w, k, s, r, a, c in
-                            zip(self.arts_Z[m], self.Z[m], self.S[m], self.R[m], self.A[m], self.C[m])]
+                out_line = [str(w) + ":" + str(k) + ":" + str(s) + ":" + str(r) + ":" + str(a)
+                            for w, k, s, r, a in
+                            zip(self.arts_Z[m], self.Z[m], self.S[m], self.R[m], self.A[m])]
                 f_zvalue.write("words\t" + self.artids_list[m] + "\t" + " ".join(out_line) + "\n")
                 f_zvalue.write("arts_ref\t" + self.artids_list[m] + "\t" + " ".join([str(item) for item in self.arts_ref[m]]) + "\n")
                 f_zvalue.write("arts_auth\t" + self.artids_list[m] + "\t" + " ".join([str(item) for item in self.arts_auth[m]]) + "\n")
@@ -950,6 +945,16 @@ class LdaBase(CorpusSet):
                 f_tag_a.write("%s\t%s\n" % (self.authorids_list[a], " ".join([str(item) for item in self.theta_a[a]])))
         return
 
+    def save_tag_c(self, file_name):
+        """
+        :key: 输出模型最终给数据打标签的结果,用到theta_c值
+        """
+        self.calculate_theta_c()
+        with open(file_name, "w", encoding="utf-8") as f_tag_c:
+            for c in range(len(self.confids_list)):
+                f_tag_c.write("%s\t%s\n" % (self.confids_list[c], " ".join([str(item) for item in self.theta_c[c]])))
+        return
+
     def save_model(self):
         """
         :key: 保存模型数据
@@ -970,6 +975,7 @@ class LdaBase(CorpusSet):
         self.save_mu(os.path.join(self.dir_path, "%s.%s" % (name_predix, "mu")))
         self.save_llambda(os.path.join(self.dir_path, "%s.%s" % (name_predix, "llambda")))
         self.save_tag_a(os.path.join(self.dir_path, "%s.%s" % (name_predix, "tag_a")))
+        self.save_tag_c(os.path.join(self.dir_path, "%s.%s" % (name_predix, "tag_c")))
         return
 
     def load_model(self):
@@ -1028,32 +1034,20 @@ class LdaModel(LdaBase):
                 s = []
                 r = []
                 a = []
-                c = []
                 for n in range(len(self.arts_Z[m])):
                     z.append(numpy.random.randint(self.K))
-                    if len(self.arts_ref[m]) == 0 and len(self.confs_paper[self.artconfs_list[m]]) == 1:
-                        s.append(numpy.random.randint(2) * 2)
-                        r.append(0)
-                        c.append(0)
-                    elif len(self.arts_ref[m]) == 0:
+                    if len(self.arts_ref[m]) == 0:
                         rand = numpy.random.randint(3)
                         s.append(3 if rand == 1 else rand)
                         r.append(0)
-                        c.append(numpy.random.randint(len(self.confs_paper[self.artconfs_list[m]])-1))
-                    elif len(self.confs_paper[self.artconfs_list[m]]) == 1:
-                        s.append(numpy.random.randint(3))
-                        r.append(numpy.random.randint(len(self.arts_ref[m])))
-                        c.append(0)
                     else:
                         s.append(numpy.random.randint(4))
                         r.append(numpy.random.randint(len(self.arts_ref[m])))
-                        c.append(numpy.random.randint(len(self.confs_paper[self.artconfs_list[m]]) - 1))
                     a.append(numpy.random.randint(len(self.arts_auth[m])))
                 self.Z.append(z)
                 self.S.append(s)
                 self.R.append(r)
                 self.A.append(a)
-                self.C.append(c)
         else:
             logging.debug("init an existed model")
 
